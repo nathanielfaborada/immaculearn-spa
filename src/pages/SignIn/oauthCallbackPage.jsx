@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import config from "../../config";
 
 const OAuthCallback = () => {
   useEffect(() => {
@@ -12,9 +13,9 @@ const OAuthCallback = () => {
     const handleMessage = (event) => {
       // Only accept messages from your backend
       const allowedOrigin =
-        process.env.VITE_ENV === "production"
-          ? "https://immaculearn.up.railway.app"
-          : "http://localhost:3000";
+      config.VITE_ENV === "production"
+        ? config.API_URL.replace('/v1', '')
+        : "http://localhost:3000";
 
       if (event.origin !== allowedOrigin) return;
 
