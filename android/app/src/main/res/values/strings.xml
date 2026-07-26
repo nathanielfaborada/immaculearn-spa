@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Immaculearn</string>
+    <string name="title_activity_main">Immaculearn</string>
+    <string name="package_name">com.immaculearn.app</string>
+    <string name="custom_url_scheme">com.immaculearn.app</string>
+</resources>
