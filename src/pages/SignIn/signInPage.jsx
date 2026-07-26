@@ -124,7 +124,7 @@ const LoginPage = () => {
     const allowedOrigins = [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://immaculearn-web.up.railway.app",
+      "https://immaculearn.online",
       config.APP_URL, // production
     ];
 
