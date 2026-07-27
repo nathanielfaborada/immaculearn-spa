@@ -152,15 +152,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   // Logout function
   const logout = async (account_id: number): Promise<void> => {
-    try {
-      await api.post("/auth/logout", { user_id: account_id }); // API should clear refresh token cookie
-      await checkAuth();
-    } catch (err) {
-      console.error("Logout error:", err);
-    } finally {
-      updateAuthState(false, null);
-    }
-  };
+  try {
+    await api.post("/auth/logout", { user_id: account_id });
+  } catch (err) {
+    console.error("Logout error:", err);
+  } finally {
+    updateAuthState(false, null);
+  }
+};
 
   // Force refresh user state
   const refreshUser = async (): Promise<void> => {

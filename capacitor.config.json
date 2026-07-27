@@ -1,5 +1,9 @@
 {
   "appId": "com.immaculearn.app",
   "appName": "Immaculearn",
-  "webDir": "dist/client"
+  "webDir": "dist/client",
+  "server": {
+    "url": "https://immaculearn.online",
+    "cleartext": true
+  }
 }
