@@ -61,7 +61,7 @@ const Sidebar = ({ isMinimized = false, onToggleMinimize }) => {
   const privateItems = [
     { icon: <Calendar size={20} />, label: "Calendar", path: "/calendar" },
     { icon: <ClipboardList size={20} />, label: "Grade Viewing", path: "/grade-viewing" },
-    { icon: <MessageCircle size={20} />, label: "Chats", path: "/chatlist" },
+    // { icon: <MessageCircle size={20} />, label: "Chats", path: "/chatlist" },
   ];
 
   const accountItems = [

@@ -76,7 +76,7 @@ const ProfSidebar = ({ isMinimized = false, onToggleMinimize }) => {
       label: "Grade Viewing",
       path: "/prof/grade-viewing",
     },
-    { icon: <MessageCircle size={20} />, label: "Chats", path: "/prof/chats" },
+    // { icon: <MessageCircle size={20} />, label: "Chats", path: "/prof/chats" },
     { icon: <Archive size={20} />, label: "Archive", path: "/prof/archive" },
   ];
 
