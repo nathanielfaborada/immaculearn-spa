@@ -129,48 +129,31 @@ const LoginPage = () => {
     ];
 
     const messageHandler = async (event) => {
-  if (!allowedOrigins.includes(event.origin)) return;
+      if (!allowedOrigins.includes(event.origin)) return;
 
-  if (event.data.type === "OAUTH_SUCCESS") {
-    const { role, needsOnboarding, token, exchangeCode } = event.data;
+      if (event.data.type === "OAUTH_SUCCESS") {
+        const { role, needsOnboarding, token } = event.data;
 
-    if (needsOnboarding && token) {
-      sessionStorage.setItem("tempToken", token);
-      navigate(`/onboarding?role=${role}`);
-      return;
-    }
-
-    if (exchangeCode) {
-      try {
-        const res = await fetch(`${config.API_URL}/account/oauth/session`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ exchangeCode }),
-        });
-        const data = await res.json();
-
-        if (!data.success) {
-          toast.error("Failed to establish session.");
-          return;
+        if (needsOnboarding && token) {
+          sessionStorage.setItem("tempToken", token);
+          navigate(`/onboarding?role=${role}`);
+        } else {
+          await checkAuth();
+          if (role === "student") {
+            navigate(`/home?role=${role}`);
+          } else if (role === "professor") {
+            navigate(`/prof/home?role=${role}`);
+          } else if (role === "admin") {
+            navigate(`/admin-dashboard?role=${role}`);
+          } else {
+            navigate("/");
+          }
         }
-
-        await checkAuth();
-
-        if (data.role === "student") navigate(`/home?role=${data.role}`);
-        else if (data.role === "professor") navigate(`/prof/home?role=${data.role}`);
-        else if (data.role === "admin") navigate(`/admin-dashboard?role=${data.role}`);
-        else navigate("/");
-      } catch (err) {
-        console.error("Session exchange failed:", err);
+      } else if (event.data.type === "OAUTH_ERROR") {
+        console.error("OAuth error:", event.data.error);
         toast.error("Failed to sign in with Google. Please try again.");
       }
-    }
-  } else if (event.data.type === "OAUTH_ERROR") {
-    console.error("OAuth error:", event.data.error);
-    toast.error("Failed to sign in with Google. Please try again.");
-  }
-};
+    };
 
     window.addEventListener("message", messageHandler);
 
